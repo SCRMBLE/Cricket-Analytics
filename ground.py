@@ -25,3 +25,15 @@ class Ground(object):
             return None
         
         return runs / matches / 2
+
+    def get_strike_rate(self):
+        index_balls = get_data_index(self.index_table, "Balls")
+        index_runs = get_data_index(self.index_table, "Runs")
+
+        balls = parse_number(False, self.summary.findAll("td")[index_balls].text)
+        runs = parse_number(False, self.summary.findAll("td")[index_runs].text)
+
+        if balls is None:
+            return None
+        
+        return balls / runs
